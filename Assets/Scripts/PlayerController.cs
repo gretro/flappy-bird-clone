@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour
         }
 
         DetectOutOfBounds();
+        DetectCollisions();
     }
 
     public void Flap()
@@ -49,5 +50,10 @@ public class PlayerController : MonoBehaviour
 
             PlayerDied.Invoke();
         }
+    }
+
+    private void DetectCollisions()
+    {
+
     }
 }
