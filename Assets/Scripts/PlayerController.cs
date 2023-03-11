@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,6 +11,8 @@ public class PlayerController : MonoBehaviour
     public float FlapVelocity = 20;
 
     private bool isFlapping = false;
+
+    public UnityEvent PlayerDied = new UnityEvent();
 
     void FixedUpdate()
     {
@@ -36,19 +37,17 @@ public class PlayerController : MonoBehaviour
         if (yPosition > UpperBound)
         {
             player.position = new Vector2(player.position.x, Mathf.Min(UpperBound, player.position.y));
-            // player.velocity = new Vector2(player.velocity.x, Mathf.Min(0));
 
             Debug.Log("Player is out of Upper bound");
 
-            // TODO: Raise event
+            PlayerDied.Invoke();
         } else if (yPosition < LowerBound)
         {
             player.position = new Vector2(player.position.x, Mathf.Max(LowerBound, player.position.y));
-            // player.velocity = new Vector2(player.velocity.x, 0);
 
             Debug.Log("Player is out of LowerBound bound");
 
-            // TODO: Raise event
+            PlayerDied.Invoke();
         }
     }
 }
