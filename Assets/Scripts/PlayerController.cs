@@ -31,6 +31,11 @@ public class PlayerController : MonoBehaviour
         isFlapping = true;
     }
 
+    public void SetEnabled(bool active)
+    {
+        player.simulated = active;
+    }
+
     private void DetectOutOfBounds()
     {
         var yPosition = player.position.y;
