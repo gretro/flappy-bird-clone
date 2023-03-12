@@ -12,6 +12,11 @@ public class TitleScreenController : MonoBehaviour
     private bool flap = false;
     private float elapsed = 0;
 
+    private void Start()
+    {
+        Screen.SetResolution(1280, 720, false);
+    }
+
     void Update()
     {
         if (flap)
