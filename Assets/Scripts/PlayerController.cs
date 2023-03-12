@@ -12,7 +12,8 @@ public class PlayerController : MonoBehaviour
 
     private bool isFlapping = false;
 
-    public UnityEvent PlayerDied = new UnityEvent();
+    public UnityEvent PlayerDied = new();
+    public UnityEvent<int> ScoreIncreased = new();
 
     void FixedUpdate()
     {
@@ -23,7 +24,6 @@ public class PlayerController : MonoBehaviour
         }
 
         DetectOutOfBounds();
-        DetectCollisions();
     }
 
     public void Flap()
@@ -52,8 +52,20 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void DetectCollisions()
+    private void OnCollisionEnter2D(Collision2D collision)
     {
+        // Colliding with Pipe
+        if (collision.gameObject.layer == 6)
+        {
+            PlayerDied.Invoke();
+        }
+    }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 7)
+        {
+            ScoreIncreased.Invoke(1);
+        }
     }
 }

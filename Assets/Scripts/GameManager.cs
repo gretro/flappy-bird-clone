@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -5,7 +6,11 @@ public class GameManager : MonoBehaviour
 {
     public PlayerController player;
 
-    public GameObject TitleScreen;
+    public GameObject GameOverScreen;
+    public TextMeshProUGUI ScoreText;
+
+    private bool isGameOver = false;
+    private int score = 0;
 
     public void RestartGame()
     {
@@ -14,7 +19,21 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        isGameOver = true;
+
         player.enabled = false;
-        TitleScreen.SetActive(true);
+        GameOverScreen.SetActive(true);
+    }
+
+    public void IncreaseScore(int points)
+    {
+        if (isGameOver)
+        {
+            return;
+        }
+
+        score += points;
+
+        ScoreText.text = score.ToString();
     }
 }
